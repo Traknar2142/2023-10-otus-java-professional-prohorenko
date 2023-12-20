@@ -29,9 +29,9 @@ public class Ioc {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            Method targerMethod = myClass.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
+            Method targetMethod = myClass.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
 
-            if (targerMethod.isAnnotationPresent(Log.class)) {
+            if (targetMethod.isAnnotationPresent(Log.class)) {
                 for (Object arg : args) {
                     logger.info("invoking arg:{}", arg);
                 }
