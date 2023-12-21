@@ -3,6 +3,8 @@ package ru.otus.ioc;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashSet;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.annotation.Log;
@@ -22,16 +24,22 @@ public class Ioc {
 
     static class DemoInvocationHandler implements InvocationHandler {
         private final TestLoggingInterface myClass;
+        private static final Set<Method> logAnnotationMethods = new HashSet<>();
 
         DemoInvocationHandler(TestLoggingInterface myClass) {
+            Method[] declaredMethods = myClass.getClass().getDeclaredMethods();
+            for (Method method : declaredMethods) {
+                if (method.isAnnotationPresent(Log.class)) {
+                    logAnnotationMethods.add(method);
+                }
+            }
             this.myClass = myClass;
         }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Method targetMethod = myClass.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
-
-            if (targetMethod.isAnnotationPresent(Log.class)) {
+            if (logAnnotationMethods.contains(targetMethod)) {
                 for (Object arg : args) {
                     logger.info("invoking arg:{}", arg);
                 }
