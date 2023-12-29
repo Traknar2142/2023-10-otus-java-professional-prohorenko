@@ -1,13 +1,13 @@
 package ru.otus.enums;
 
 public enum Denomination {
-    FIFTY(mnemonic, denomination),
-    ONE_HUNDRED(mnemonic, denomination),
-    TWO_HUNDRED(mnemonic, denomination),
-    FIVE_HUNDRED(mnemonic, denomination),
-    ONE_THOUSAND(mnemonic, denomination),
-    TWO_THOUSAND(mnemonic, denomination),
-    FIVE_THOUSAND(mnemonic, denomination);
+    FIFTY("FIFTY", 50),
+    ONE_HUNDRED("ONE_HUNDRED", 100),
+    TWO_HUNDRED("TWO_HUNDRED", 200),
+    FIVE_HUNDRED("FIVE_HUNDRED", 500),
+    ONE_THOUSAND("ONE_THOUSAND", 1000),
+    TWO_THOUSAND("TWO_THOUSAND", 2000),
+    FIVE_THOUSAND("FIVE_THOUSAND", 5000);
 
     private final String mnemonic;
     private final int denomination;
@@ -15,5 +15,13 @@ public enum Denomination {
     Denomination(String mnemonic, int denomination) {
         this.mnemonic = mnemonic;
         this.denomination = denomination;
+    }
+
+    public String getMnemonic() {
+        return mnemonic;
+    }
+
+    public int getValue() {
+        return denomination;
     }
 }
