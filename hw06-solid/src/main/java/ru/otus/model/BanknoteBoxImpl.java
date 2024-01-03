@@ -1,6 +1,7 @@
 package ru.otus.model;
 
 import ru.otus.enums.Denomination;
+import ru.otus.exception.NoMoneyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,18 @@ public class BanknoteBoxImpl implements BanknoteBox {
         }
 
         return result;
+    }
+
+    @Override
+    public Map<Denomination, Integer> getCashInfo() {
+        if (!cashHolder.isEmpty()){
+            Map<Denomination, Integer> cashInfo = new HashMap<>();
+            for (Map.Entry<Denomination, List<Banknote>> entry : cashHolder.entrySet()){
+                cashInfo.put(entry.getKey(),entry.getValue().size());
+            }
+            return cashInfo;
+        }
+        throw new NoMoneyException("Atm has no money");
     }
 
     private void putBanknote(Banknote banknote) {
