@@ -4,12 +4,12 @@ import ru.otus.enums.Denomination;
 
 public class OneThousandBanknote extends Banknote {
     @Override
-    Denomination getDenomination() {
+    public Denomination getDenomination() {
         return Denomination.ONE_THOUSAND;
     }
 
     @Override
-    int getDenominationValue() {
+    public int getDenominationValue() {
         return Denomination.ONE_THOUSAND.getValue();
     }
 }

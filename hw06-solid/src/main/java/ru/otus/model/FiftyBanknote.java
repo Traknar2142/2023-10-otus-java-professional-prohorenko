@@ -9,7 +9,7 @@ public class FiftyBanknote extends Banknote {
     }
 
     @Override
-    int getDenominationValue() {
+    public int getDenominationValue() {
         return Denomination.FIFTY.getValue();
     }
 }
