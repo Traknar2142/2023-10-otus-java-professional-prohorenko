@@ -1,11 +1,10 @@
 package ru.otus.model;
 
-import ru.otus.enums.Denomination;
-
 import java.util.List;
 import java.util.Map;
+import ru.otus.enums.Denomination;
 
-public class AtmImpl implements Atm{
+public class AtmImpl implements Atm {
     private final BanknoteBox banknoteBox;
 
     public AtmImpl(BanknoteBox banknoteBox) {
@@ -26,7 +25,7 @@ public class AtmImpl implements Atm{
     public int showBalance() {
         Map<Denomination, Integer> cashInfo = banknoteBox.getCashInfo();
         int result = 0;
-        for (Map.Entry<Denomination, Integer> entry : cashInfo.entrySet()){
+        for (Map.Entry<Denomination, Integer> entry : cashInfo.entrySet()) {
             result += entry.getKey().getValue() * entry.getValue();
         }
         return result;

@@ -2,7 +2,7 @@ package ru.otus.model;
 
 import ru.otus.enums.Denomination;
 
-public class FiveHundredBanknote extends Banknote{
+public class FiveHundredBanknote extends Banknote {
     @Override
     public Denomination getDenomination() {
         return Denomination.FIVE_HUNDRED;

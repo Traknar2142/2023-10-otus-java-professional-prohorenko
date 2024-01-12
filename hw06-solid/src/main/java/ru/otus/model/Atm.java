@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface Atm {
     void insertBanknotes(List<Banknote> banknotes);
+
     List<Banknote> getMoney(int sumOfMoney);
 
     int showBalance();

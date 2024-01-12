@@ -1,17 +1,15 @@
 package ru.otus.model;
 
-import ru.otus.enums.Denomination;
-import ru.otus.exception.NoMoneyException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import ru.otus.enums.Denomination;
+import ru.otus.exception.NoMoneyException;
 
 public class BanknoteBoxImpl implements BanknoteBox {
-    private static final Map<Denomination, List<Banknote>> cashHolder = new TreeMap<>();
+    private final Map<Denomination, List<Banknote>> cashHolder = new TreeMap<>();
 
     @Override
     public void insertBanknotes(List<Banknote> banknotes) {
@@ -34,16 +32,19 @@ public class BanknoteBoxImpl implements BanknoteBox {
             }
             if (sumOfMoney == 0) break;
         }
+        if (sumOfMoney != 0) {
+            throw new NoMoneyException("Недостаточно денег");
+        }
 
         return result;
     }
 
     @Override
     public Map<Denomination, Integer> getCashInfo() {
-        if (!cashHolder.isEmpty()){
-            Map<Denomination, Integer> cashInfo = new HashMap<>();
-            for (Map.Entry<Denomination, List<Banknote>> entry : cashHolder.entrySet()){
-                cashInfo.put(entry.getKey(),entry.getValue().size());
+        if (!cashHolder.isEmpty()) {
+            Map<Denomination, Integer> cashInfo = new EnumMap<>(Denomination.class);
+            for (Map.Entry<Denomination, List<Banknote>> entry : cashHolder.entrySet()) {
+                cashInfo.put(entry.getKey(), entry.getValue().size());
             }
             return cashInfo;
         }

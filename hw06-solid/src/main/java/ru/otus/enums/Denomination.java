@@ -10,11 +10,11 @@ public enum Denomination {
     FIVE_THOUSAND("FIVE_THOUSAND", 5000);
 
     private final String mnemonic;
-    private final int denomination;
+    private final int value;
 
     Denomination(String mnemonic, int denomination) {
         this.mnemonic = mnemonic;
-        this.denomination = denomination;
+        this.value = denomination;
     }
 
     public String getMnemonic() {
@@ -22,6 +22,6 @@ public enum Denomination {
     }
 
     public int getValue() {
-        return denomination;
+        return value;
     }
 }
