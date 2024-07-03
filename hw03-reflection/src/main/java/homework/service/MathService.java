@@ -16,8 +16,4 @@ public class MathService {
     public Integer divide(Integer a, Integer b) {
         return a / b;
     }
-
-    public String destroy(){
-        return "call destroy";
-    }
 }

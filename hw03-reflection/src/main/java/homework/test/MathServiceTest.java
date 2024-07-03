@@ -1,11 +1,11 @@
 package homework.test;
 
+import static homework.utils.AssertionUtils.assertEquals;
+
 import homework.annotations.After;
 import homework.annotations.Before;
 import homework.annotations.Test;
 import homework.service.MathService;
-
-import static homework.utils.AssertionUtils.assertEquals;
 
 public class MathServiceTest {
     MathService mathService;
