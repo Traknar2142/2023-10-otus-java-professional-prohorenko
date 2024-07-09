@@ -1,5 +1,7 @@
 package homework.processor;
 
+import static homework.utils.InvocationUtils.optionalInvoke;
+
 import homework.annotations.After;
 import homework.annotations.Before;
 import homework.annotations.Test;
@@ -19,11 +21,12 @@ public class TestAnnotationProcessor {
         Method beforeMethod = getAnnotatedMethod(testClass, Before.class);
         Method afterMethod = getAnnotatedMethod(testClass, After.class);
 
-        Object instance = testClass.getDeclaredConstructor().newInstance();
+        Object instance = null;
         int failCount = 0;
         for (Method method : annotatedTestMethods) {
             try {
-                beforeMethod.invoke(instance);
+                instance = testClass.getDeclaredConstructor().newInstance();
+                optionalInvoke(beforeMethod, instance);
                 method.invoke(instance);
                 System.out.println("test: " + method.getName() + " passed");
             } catch (InvocationTargetException e) {
@@ -31,7 +34,7 @@ public class TestAnnotationProcessor {
                         + e.getTargetException().getMessage());
                 failCount++;
             } finally {
-                afterMethod.invoke(instance);
+                optionalInvoke(afterMethod, instance);
             }
         }
         printStatistic(annotatedTestMethods.size(), failCount);
