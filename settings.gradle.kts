@@ -1,6 +1,7 @@
 rootProject.name = "otusJava"
 include("hw01-gradle")
 include("hw02-generics")
+include("hw03-reflection")
 include("hw05-aop")
 include("hw06-solid")
 
