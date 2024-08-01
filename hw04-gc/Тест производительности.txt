@@ -1,0 +1,78 @@
+Задание 1
+
+-Xms256m
+-Xmx256m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:15861, sec:15
+
+-Xms512m
+-Xmx512m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:10678, sec:10
+
+-Xms768m
+-Xmx768m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:10366, sec:10
+
+-Xms896m
+-Xmx896m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:9992, sec:9
+
+-Xms1024m
+-Xmx1024m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:9744, sec:9
+
+-Xms1250m
+-Xmx1250m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:9857, sec:9
+
+-Xms2g
+-Xmx2g
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:9654, sec:9
+
+
+Вывод:
+Тесты показывают, что на хост машине оптимальной выделенной помятью для jvm будет являеться значение в районе 1024m. 
+Большее значение ставить не имеет смысла т.к. при такой конфигурации gc работет штатно, без дополнительных вызовов gc при превышении определенного процента занятой памяти
+
+
+Задача 2 (Оптимизация кода)
+
+-Xms2m
+-Xmx2m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/heapdump.hprof
+-XX:+UseG1GC
+
+spend msec:536, sec:0
+
+Вывов: Прирост производительности достигнут:
+1) Упразднены операции боксинга примитивов в объекты типа Integer
+2) Убранна коллекция, хранившая в себе объекты типа Data не давая GC освободить место в куче (объекты хранились в коллекции, пока их не накопиться 6_600_000)
+Вместо нее добавлен счетчик.
