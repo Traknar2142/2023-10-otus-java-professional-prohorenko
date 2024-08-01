@@ -5,6 +5,7 @@ include("hw03-reflection")
 include("hw04-gc")
 include("hw05-aop")
 include("hw06-solid")
+include("hw07-patterns")
 
 
 pluginManagement {
