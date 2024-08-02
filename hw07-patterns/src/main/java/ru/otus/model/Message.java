@@ -1,6 +1,7 @@
 package ru.otus.model;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @SuppressWarnings({"java:S107", "java:S1135", "java:S2975"})
 public class Message implements Cloneable {
@@ -274,15 +275,18 @@ public class Message implements Cloneable {
     // Сделал через super.clone() т.к. для данного задания достаточно.
     // Однако можно сделать то же самое через билдер не реализуя никаких интерфейсов Cloneable и не обрабатывая
     // Checked исключения.
+
+    // Вышло костыльненько т.к. лямбды не дают модифицировать аргументы тела метода вне лямбды.
+    // Но куча ифов мне нравиться еще меньше :)
     public Message clone() {
         try {
-            Message clone = (Message) super.clone();
-            ArrayList<String> field13Data = new ArrayList<>(this.getField13().getData());
-            ObjectForMessage newField13 = new ObjectForMessage();
-            newField13.setData(field13Data);
-            Builder builder = clone.toBuilder();
-            builder.field13(newField13);
-            return builder.build();
+            final Message[] clone = {(Message) super.clone()};
+            Optional.ofNullable(this.field13).ifPresent(objectForMessage -> {
+                clone[0] = clone[0].toBuilder().field13(new ObjectForMessage()).build();
+                Optional.ofNullable(objectForMessage.getData())
+                        .ifPresent(data -> clone[0].getField13().setData(new ArrayList<>(data)));
+            });
+            return clone[0];
 
         } catch (CloneNotSupportedException e) {
             return this;
