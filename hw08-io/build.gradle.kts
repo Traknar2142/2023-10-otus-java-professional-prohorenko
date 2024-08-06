@@ -5,4 +5,5 @@ dependencies {
     testImplementation ("org.junit.jupiter:junit-jupiter-engine")
     testImplementation ("org.assertj:assertj-core")
     testImplementation ("org.mockito:mockito-junit-jupiter")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
 }
