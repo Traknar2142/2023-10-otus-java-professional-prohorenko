@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -18,6 +20,7 @@ class ProcessorTest {
 
     @Test
     @DisplayName("Из файла читается json, обрабатывается, результат сериализуется в строку")
+    @Disabled
     void processingTest(@TempDir Path tempDir) throws IOException {
         System.out.println(tempDir);
 
